@@ -1,8 +1,8 @@
 import express from "express";
-import { SendURL } from "../controllers";
+import { Upload } from "../controllers";
 
 const router = express.Router();
 
-router.post("/sendUrl", SendURL)
+router.post("/upload", Upload)
 
 export default router;

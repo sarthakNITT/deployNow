@@ -1,4 +1,4 @@
-# http-backend
+# upload-service
 
 To install dependencies:
 
