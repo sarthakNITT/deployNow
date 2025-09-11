@@ -15,7 +15,7 @@ export default async function DownloadFromS3 (prefix: string) {
                 resolve("");
                 return;
             }
-            const finalOutputPath = path.join(`${__dirname.slice(0, __dirname.length - 9)}dist/`, Key);
+            const finalOutputPath = path.join(`${__dirname.slice(0, __dirname.length - 9)}dist/`, prefix.replace("output/", ""), Key.replace(`${prefix}/`, ""));
             const outputFile = fs.createWriteStream(finalOutputPath);
             const dirName = path.dirname(finalOutputPath);
             if(!fs.existsSync(dirName)){

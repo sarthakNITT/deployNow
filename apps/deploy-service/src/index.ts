@@ -16,16 +16,18 @@ async function Main () {
         )
         const id = res?.element;
         console.log(id);
-        await DownloadFromS3(`output/${id}`);
-        console.log("Downloaded");
-        await BuildProject(`${id}`);
-        console.log("build ready");
-        const fullPath = __dirname.slice(0, __dirname.length - 3);
-        const files = GetAllFiles(`${fullPath}dist/${id}`);
-        files.forEach(async (file)=>{
-            const relativePath = path.relative(`${fullPath}/dist/${id}`, file);
-            await PushBuildToS3(`dist/${id}/${relativePath}`, file);
-        })
+        DownloadFromS3(`output/${id}`).then(()=>{
+            console.log("Downloaded");
+            BuildProject(`${id}`).then(()=>{
+                console.log("build ready");
+                const fullPath = __dirname.slice(0, __dirname.length - 3);
+                const files = GetAllFiles(`${fullPath}dist/${id}`);
+                files.forEach(async (file)=>{
+                    const relativePath = path.relative(`${fullPath}/dist/${id}`, file);
+                    await PushBuildToS3(`dist/${id}/${relativePath}`, file);
+                })
+            });
+        });
     }
 }
 Main();
