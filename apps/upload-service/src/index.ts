@@ -7,12 +7,13 @@ import { createClient } from "redis";
 
 export const publisher = createClient();
 const app = express();
-
-publisher.connect();
 app.use(express.json());
 app.use(cors());
 app.use("/api/v1", router)
 
-app.listen(3000, ()=>{
-    console.log("Server is running on port: 3000");
-})
+publisher.connect().then(()=>{
+    console.log("Connected publisher: redisClient");
+    app.listen(3000, ()=>{
+        console.log("Server is running on port: 3000");
+    })
+});

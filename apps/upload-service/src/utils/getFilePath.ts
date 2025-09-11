@@ -4,6 +4,7 @@ import path from "path";
 export default function GetFilePath (filePath: string) {
     let response: string[] = [];
     const files = fs.readdirSync(filePath);
+    console.log("File path iteration started");
     files.forEach(file => {
         const fullPath = path.join(filePath, file);
         const stat = fs.statSync(fullPath); 

@@ -3,7 +3,7 @@ export default function GenerateID () {
     const length = 10;
     let id = "";
     for(let i=0;i<length;i++){
-        id += Math.floor(Math.random() * sample.length);
+        id += sample[Math.floor(Math.random() * sample.length)];
     }
     return id;
 }
