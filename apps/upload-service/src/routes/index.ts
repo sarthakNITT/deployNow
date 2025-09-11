@@ -1,8 +1,9 @@
 import express from "express";
-import { Upload } from "../controllers";
+import { Upload, Status } from "../controllers";
 
 const router = express.Router();
 
 router.post("/upload", Upload)
+router.get("/status", Status)
 
 export default router;

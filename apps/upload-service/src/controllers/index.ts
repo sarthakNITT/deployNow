@@ -5,6 +5,10 @@ import GenerateID from "../utils/generateID";
 import GetFilePath from "../utils/getFilePath";
 import PushToS3 from "../utils/pushRepoToS3";
 import RedisPublisher from "../utils/redisPublisher";
+import { createClient } from "redis";
+
+const subscriber = createClient();
+subscriber.connect();
 
 export const Upload = async (req:Request, res:Response) => {
     const url = req.body.url;
@@ -28,5 +32,13 @@ export const Upload = async (req:Request, res:Response) => {
     console.log("Upload service completed");
     res.json({
         id: id
+    })
+}
+
+export const Status = async (req:Request, res:Response) => {
+    const id = req.query.id;
+    const response = await subscriber.hGet("status", id as string);
+    res.json({
+        status: response
     })
 }

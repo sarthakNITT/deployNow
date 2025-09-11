@@ -7,6 +7,8 @@ import path from "path"
 
 const subscriber = createClient();
 subscriber.connect();
+const publisher = createClient();
+publisher.connect();
 
 async function Main () {
     while(1){
@@ -26,6 +28,8 @@ async function Main () {
                     const relativePath = path.relative(`${fullPath}/dist/${id}/build`, file);
                     await PushBuildToS3(`dist/${id}/${relativePath}`, file);
                 })
+                const statusId = `${id}`;
+                publisher.hSet("status", statusId, "deployed");
             });
         });
     }
