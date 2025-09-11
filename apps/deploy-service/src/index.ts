@@ -21,9 +21,9 @@ async function Main () {
             BuildProject(`${id}`).then(()=>{
                 console.log("build ready");
                 const fullPath = __dirname.slice(0, __dirname.length - 3);
-                const files = GetAllFiles(`${fullPath}dist/${id}`);
+                const files = GetAllFiles(`${fullPath}dist/${id}/build`);
                 files.forEach(async (file)=>{
-                    const relativePath = path.relative(`${fullPath}/dist/${id}`, file);
+                    const relativePath = path.relative(`${fullPath}/dist/${id}/build`, file);
                     await PushBuildToS3(`dist/${id}/${relativePath}`, file);
                 })
             });
