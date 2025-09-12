@@ -1,5 +1,5 @@
 import fs from "fs";
-import { client } from "../aws";
+import { client } from "@repo/aws-clilent/client";
 import { PutObjectCommand } from "@aws-sdk/client-s3";
 
 export default async function PushBuildToS3 (fileName: string, filePath: string) {
