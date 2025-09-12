@@ -1,8 +1,11 @@
 {
-  "name": "deploy-service",
+  "name": "@repo/aws-clilent",
   "module": "index.ts",
   "type": "module",
   "private": true,
+  "exports": {
+    "./client": "./index.ts"
+  },
   "devDependencies": {
     "@types/bun": "latest"
   },
@@ -10,8 +13,6 @@
     "typescript": "^5"
   },
   "dependencies": {
-    "@repo/aws-clilent": "*",
-    "@aws-sdk/client-s3": "^3.884.0",
-    "redis": "^5.8.2"
+    "@aws-sdk/client-s3": "^3.887.0"
   }
 }

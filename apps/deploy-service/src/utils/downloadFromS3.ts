@@ -1,5 +1,5 @@
 import { GetObjectCommand, ListObjectsV2Command } from "@aws-sdk/client-s3";
-import { client } from "../aws";
+import { client } from "@repo/aws-clilent/client";
 import path from "path"
 import fs from "fs"
 

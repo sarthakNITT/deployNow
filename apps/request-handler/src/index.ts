@@ -1,16 +1,7 @@
 import express, { type Request, type Response } from "express";
-import { GetObjectCommand, S3Client } from "@aws-sdk/client-s3";
+import { GetObjectCommand } from "@aws-sdk/client-s3";
+import { client } from "@repo/aws-clilent/client";
 const app = express();
-
-
-export const client = new S3Client({
-    region: "auto",
-    endpoint: process.env.CLOUDFARE_URL,
-    credentials: {
-        accessKeyId: process.env.CLOUDFARE_ACCESS_ID ?? "",
-        secretAccessKey: process.env.CLOUDFARE_SECRET_ACCESS_KEY ?? ""
-    }
-})
 
 app.use(express.json());
 app.get("/*", async(req: Request, res: Response)=>{

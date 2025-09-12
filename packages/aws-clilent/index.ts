@@ -1,5 +1,4 @@
 import { S3Client } from "@aws-sdk/client-s3";
-import DownloadFromS3 from "./utils/downloadFromS3";
 
 export const client = new S3Client({
     region: "auto",

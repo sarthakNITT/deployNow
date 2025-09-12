@@ -10,6 +10,7 @@
     "typescript": "^5"
   },
   "dependencies": {
+    "@repo/aws-clilent": "*",
     "@aws-sdk/client-s3": "^3.884.0",
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.3",
