@@ -1,7 +1,10 @@
 import { serve } from 'bun';
 import { GetObjectCommand } from '@aws-sdk/client-s3';
 import { client } from '@repo/aws-clilent/client';
-import 'dotenv/config';
+import { config } from 'dotenv';
+import { resolve } from 'path';
+
+config({ path: resolve(__dirname, '../../../.env') });
 
 let currentId = '';
 
@@ -63,6 +66,7 @@ serve({
 
       return new Response(body, { headers: { 'Content-Type': type } });
     } catch (err) {
+      console.log(process.env.CLOUDFARE_URL);
       console.error(err);
       return new Response('Not Found', { status: 404 });
     }
