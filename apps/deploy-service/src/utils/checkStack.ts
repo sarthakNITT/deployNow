@@ -1,20 +1,15 @@
 import fs from "fs"
-import { createClient } from "redis";
-import ViteStack from "./stacks/vite";
-import CoreReactStack from "./stacks/coreReact";
 
-const publisher = createClient();
-publisher.connect();
-
-export default function CheckStack (files: string[], fullPath: string, id: string, basePath: string) {
+export default function CheckStack (basePath: string) {
     const packageFilePath = `${basePath}/package.json`;
+    console.log(`packageFilePath: ${packageFilePath}`);
+    
     const data = fs.readFileSync(packageFilePath, {encoding: "utf-8"});
     if(data.includes("vite")){
-        ViteStack(files, fullPath, id);
+        return "vite";
     }else{
-        CoreReactStack(files, fullPath, id, basePath);
+        return "coreReact"
     };
-    publisher.hSet("status", id, "deployed");
 };
 
 
