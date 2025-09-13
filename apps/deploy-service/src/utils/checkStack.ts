@@ -1,33 +1,16 @@
-import fs from "fs"
+import fs from 'fs';
 
-export default function CheckStack (basePath: string) {
-    const packageFilePath = `${basePath}/package.json`;
-    console.log(`packageFilePath: ${packageFilePath}`);
-    
-    const data = fs.readFileSync(packageFilePath, {encoding: "utf-8"});
-    if(data.includes("vite")){
-        return "vite";
-    }else{
-        return "coreReact"
-    };
-};
+export default function CheckStack(basePath: string) {
+  const packageFilePath = `${basePath}/package.json`;
+  console.log(`packageFilePath: ${packageFilePath}`);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  const data = fs.readFileSync(packageFilePath, { encoding: 'utf-8' });
+  if (data.includes('vite')) {
+    return 'vite';
+  } else {
+    return 'coreReact';
+  }
+}
 
 // files.forEach((e)=>{
 //     if(e.endsWith("package.json")){
