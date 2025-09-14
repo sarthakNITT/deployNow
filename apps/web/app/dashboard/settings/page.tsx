@@ -172,7 +172,7 @@ export default function SettingsPage() {
                       <select
                         value={projectSettings.nodeVersion}
                         onChange={(e) => setProjectSettings({ ...projectSettings, nodeVersion: e.target.value })}
-                        className="input-sm w-full"
+                        className="input-sm w-full border border-border bg-input text-sm text-white rounded px-2 py-1 focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary"
                       >
                         <option value="18.x">18.x</option>
                         <option value="16.x">16.x</option>

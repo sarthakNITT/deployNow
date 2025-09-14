@@ -26,7 +26,7 @@ export function SmallButton({
       whileHover={!isDisabled ? { scale: 1.02 } : {}}
       whileTap={!isDisabled ? { scale: 0.98 } : {}}
       className={clsx(
-        'btn-sm',
+        'btn-sm inline-flex items-center justify-center py-3',
         {
           'btn-primary': variant === 'primary',
           'btn-secondary': variant === 'secondary',

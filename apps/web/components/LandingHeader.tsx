@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion'
 import Link from 'next/link'
+import AuthServer from './authServer'
 
 export function LandingHeader() {
   return (
@@ -31,18 +32,7 @@ export function LandingHeader() {
             animate={{ x: 0, opacity: 1 }}
             transition={{ duration: 0.4, delay: 0.3 }}
           >
-            <Link 
-              href="/auth"
-              className="btn-sm btn-ghost hover:text-primary hover:bg-primary/10 transition-all duration-300 font-medium"
-            >
-              Login
-            </Link>
-            <Link 
-              href="/auth"
-              className="btn-sm btn-primary hover:shadow-lg hover:shadow-primary/25 hover:scale-105 transition-all duration-300 font-medium"
-            >
-              Sign Up
-            </Link>
+            <AuthServer/>
           </motion.div>
         </div>
       </div>

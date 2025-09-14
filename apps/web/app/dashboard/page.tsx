@@ -15,6 +15,7 @@ import { api } from '@/lib/api'
 import type { Deployment } from '@/lib/types'
 
 export default function DashboardPage() {
+
   useAuth() // Protect route
   
   const [showUpload, setShowUpload] = useState(false)
@@ -55,7 +56,7 @@ export default function DashboardPage() {
           </div>
           <button
             onClick={() => setShowUpload(true)}
-            className="btn-sm btn-primary inline-flex items-center gap-1"
+            className="btn-sm py-2 px-6 btn-primary inline-flex items-center gap-1"
           >
             <Plus className="w-3 h-3" />
             New Project
@@ -87,7 +88,7 @@ export default function DashboardPage() {
                 <p className="text-gray-400 mb-3 text-xs">No projects yet</p>
                 <button
                   onClick={() => setShowUpload(true)}
-                  className="btn-sm btn-primary"
+                  className="btn-sm py-2 px-6 btn-primary"
                 >
                   Deploy your first project
                 </button>
