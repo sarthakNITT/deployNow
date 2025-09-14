@@ -10,35 +10,52 @@ import { FeaturesSection } from '@/components/FeaturesSection'
 import { WhyChooseSection } from '@/components/WhyChooseSection'
 import { FAQSection } from '@/components/FAQSection'
 import { Footer } from '@/components/Footer'
-
+import { Typewriter } from 'react-simple-typewriter'
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen relative">
-      <HeroBackground />
+    <div className="min-h-screen bg-black relative">
       <LandingHeader />
       
       {/* Hero Section */}
-      <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
+      <section className="relative h-screen flex items-center justify-center overflow-hidden z-0">
+        <HeroBackground />
         <div className="relative z-10 text-center max-w-3xl mx-auto px-6">
+          
+          {/* Heading with typing effect */}
           <motion.h1 
-            className="text-4xl md:text-5xl font-bold mb-4 tracking-tight"
+            className="text-4xl md:text-5xl font-bold mb-6 tracking-tight"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            Deploy Instantly
+            Deploy{" "}
+            <span className="text-primary">
+              <Typewriter
+                words={['Instantly', 'Fast', 'On LocalServer']}
+                loop={true}
+                cursor
+                cursorStyle="|"
+                typeSpeed={90}
+                deleteSpeed={50}
+                delaySpeed={1500}
+              />
+            </span>
           </motion.h1>
-          
+
+          {/* Longer Subheading */}
           <motion.p 
-            className="text-sm md:text-base text-gray-400 mb-6 max-w-xl mx-auto"
+            className="text-sm md:text-base text-gray-400 mb-8 max-w-2xl mx-auto leading-relaxed"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            Simple deployment platform for your frontend projects.
+            A fast and reliable way to ship your frontend projects.
+            Zero setup, instant builds, and effortless deployments —
+            so you can focus on building while we handle the rest.
           </motion.p>
           
+          {/* CTA */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -46,7 +63,7 @@ export default function HomePage() {
           >
             <Link 
               href="/auth"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-primary hover:bg-primary/90 text-black font-semibold rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-primary/25 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-offset-2 focus:ring-offset-black"
+              className="text-[12px] inline-flex items-center gap-2 px-5 py-3 bg-primary hover:bg-primary/90 text-black font-semibold rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-primary/25 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-offset-2 focus:ring-offset-black"
             >
               Get Started
               <ArrowRight className="w-4 h-4" />
@@ -56,7 +73,7 @@ export default function HomePage() {
       </section>
 
       {/* Step Showcase */}
-      <section className="py-16 px-6">
+      <section className="py-16 px-6 bg-black">
         <div className="max-w-5xl mx-auto">
           <motion.div 
             className="text-center mb-16"

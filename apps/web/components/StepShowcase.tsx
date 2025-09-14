@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Upload, CheckCircle, Globe, ArrowDown } from 'lucide-react'
+import { Upload, CheckCircle, Globe } from 'lucide-react'
 import { DashboardScreenshot } from './DashboardScreenshot'
 
 const steps = [
@@ -27,47 +27,39 @@ const steps = [
 
 export function StepShowcase() {
   return (
-    <div className="space-y-16">
-        {steps.map((step, index) => (
-          <div key={step.title}>
-            <motion.div
-              className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12"
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.2 }}
-              viewport={{ once: true }}
-            >
-              {/* Step info */}
-              <div className={`flex-1 text-center lg:text-left ${index % 2 === 1 ? 'lg:order-2' : ''}`}>
-                <div className="inline-flex items-center justify-center w-8 h-8 bg-primary/20 rounded mb-3">
-                  <step.icon className="w-4 h-4 text-primary" />
-                </div>
-                <h3 className="text-lg font-semibold mb-2">{step.title}</h3>
-                <p className="text-gray-400 text-sm max-w-md mx-auto lg:mx-0">{step.description}</p>
+    <div className="relative w-full overflow-hidden py-4">
+      {/* Moving container */}
+      <motion.div
+        className="flex gap-8"
+        animate={{ x: ['0%', '-100%'] }}
+        transition={{
+          repeat: Infinity,
+          duration: 20,   // speed (bigger = slower)
+          ease: 'linear'
+        }}
+      >
+        {/* Duplicate steps so loop looks seamless */}
+        {[...steps, ...steps].map((step, index) => (
+          <div
+            key={index}
+            className="flex-shrink-0 w-80 flex flex-col items-center text-center"
+          >
+            {/* Screenshot */}
+            <div className="w-full bg-surface/50 rounded-lg border border-border overflow-hidden mb-4">
+              <DashboardScreenshot type={step.screenshot as 'upload' | 'success' | 'deploy'} />
+            </div>
+
+            {/* Info */}
+            <div>
+              <div className="inline-flex items-center justify-center w-10 h-10 bg-primary/20 rounded mb-3">
+                <step.icon className="w-5 h-5 text-primary" />
               </div>
-              
-              {/* Screenshot */}
-              <div className={`flex-1 max-w-md ${index % 2 === 1 ? 'lg:order-1' : ''}`}>
-                <div className="bg-surface/50 rounded-lg border border-border overflow-hidden">
-                  <DashboardScreenshot type={step.screenshot as 'upload' | 'success' | 'deploy'} />
-                </div>
-              </div>
-            </motion.div>
-            
-            {/* Arrow between steps */}
-            {index < steps.length - 1 && (
-              <motion.div 
-                className="flex justify-center my-8"
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                transition={{ duration: 0.4, delay: 0.3 }}
-                viewport={{ once: true }}
-              >
-                <ArrowDown className="w-4 h-4 text-gray-600" />
-              </motion.div>
-            )}
+              <h3 className="text-lg font-semibold mb-2">{step.title}</h3>
+              <p className="text-gray-400 text-sm">{step.description}</p>
+            </div>
           </div>
         ))}
+      </motion.div>
     </div>
   )
 }
