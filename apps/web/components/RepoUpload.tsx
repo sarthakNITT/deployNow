@@ -5,6 +5,8 @@ import { motion } from 'framer-motion'
 import { Upload, X, Github } from 'lucide-react'
 import { SmallButton } from './SmallButton'
 import { api } from '@/lib/api'
+import axios from 'axios'
+import { data } from 'autoprefixer'
 
 interface Props {
   onSuccess: (project: { id: string, status: string }) => void
@@ -32,8 +34,10 @@ export function RepoUpload({ onSuccess, onCancel }: Props) {
 
     try {
       // Call API endpoint: POST ${NEXT_PUBLIC_API_BASE}/upload
-      const response = await api.uploadRepo(repoUrl)
-      onSuccess(response)
+      const response = await axios.post(`${process.env.UPLOAD_SERVICE_URL}`, {
+        url: repoUrl
+      });
+      onSuccess({ id: response.data.id, status: 'pending' });
     } catch (err: any) {
       setError(err.message || 'Upload failed. Please try again.')
     } finally {
