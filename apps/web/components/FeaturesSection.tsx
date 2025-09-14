@@ -1,0 +1,69 @@
+'use client'
+
+import { motion } from 'framer-motion'
+import { Zap, Shield, Globe, Code } from 'lucide-react'
+
+const features = [
+  {
+    icon: Zap,
+    title: 'Lightning Fast',
+    description: 'Deploy in seconds with optimized builds'
+  },
+  {
+    icon: Shield,
+    title: 'Secure by Default',
+    description: 'HTTPS and security headers included'
+  },
+  {
+    icon: Globe,
+    title: 'Global CDN',
+    description: 'Worldwide edge network for speed'
+  },
+  {
+    icon: Code,
+    title: 'Git Integration',
+    description: 'Connect any GitHub repository'
+  }
+]
+
+export function FeaturesSection() {
+  return (
+    <section className="py-16 px-6">
+      <div className="max-w-4xl mx-auto">
+        <motion.div 
+          className="text-center mb-12"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+        >
+          <h2 className="text-2xl font-bold mb-3">
+            Everything You Need
+          </h2>
+          <p className="text-gray-400 text-sm">
+            Simple deployment with powerful features
+          </p>
+        </motion.div>
+        
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {features.map((feature, index) => (
+            <motion.div
+              key={feature.title}
+              className="text-center"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+              viewport={{ once: true }}
+            >
+              <div className="inline-flex items-center justify-center w-8 h-8 bg-primary/20 rounded mb-3">
+                <feature.icon className="w-4 h-4 text-primary" />
+              </div>
+              <h3 className="text-sm font-semibold mb-2">{feature.title}</h3>
+              <p className="text-gray-400 text-xs">{feature.description}</p>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}

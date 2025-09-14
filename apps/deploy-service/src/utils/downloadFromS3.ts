@@ -5,7 +5,9 @@ import { GetObjectCommand, ListObjectsV2Command } from '@aws-sdk/client-s3';
 import { client } from '@repo/aws-clilent/client';
 
 export default async function DownloadFromS3(prefix: string) {
+  console.log("Download called");
   try {
+    console.log("Download started");
     const allFiles = new ListObjectsV2Command({
       Bucket: 'deploy-now',
       Prefix: prefix,
