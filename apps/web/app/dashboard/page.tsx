@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { motion } from 'framer-motion'
 import { Plus } from 'lucide-react'
-import { Navbar } from '@/components/Navbar'
 import { RepoUpload } from '@/components/RepoUpload'
 import { ProjectCard } from '@/components/ProjectCard'
 import { DeployModal } from '@/components/DeployModal'
@@ -13,6 +12,7 @@ import { Toast } from '@/components/Toast'
 import { api } from '@/lib/api'
 import type { Deployment } from '@/lib/types'
 import { useUser } from '@clerk/nextjs'
+import { LandingHeader } from '@/components/LandingHeader'
 
 export default function DashboardPage() {
 
@@ -49,7 +49,7 @@ export default function DashboardPage() {
 
   return (
     <div className="min-h-screen bg-black">
-      <Navbar />
+      <LandingHeader/>
       
       <main className="max-w-7xl mx-auto px-6 py-8">
         {/* Header */}
