@@ -5,6 +5,7 @@ import { motion } from 'framer-motion'
 import { Github, Mail, ArrowLeft } from 'lucide-react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
+import { useSignIn } from '@clerk/nextjs'
 import { SmallButton } from '@/components/SmallButton'
 import { Toast } from '@/components/Toast'
 
@@ -12,36 +13,40 @@ export default function AuthPage() {
   const [loading, setLoading] = useState(false)
   const [showToast, setShowToast] = useState<{ type: 'success' | 'error', message: string } | null>(null)
   const router = useRouter()
+  const { signIn } = useSignIn()
 
-  const handleLogin = async (type: 'github' | 'email') => {
+  const handleGoogleAuth = async () => {
+    if (!signIn) return
+    
     setLoading(true)
     
-    // Simulate auth - in real app this would call your backend auth endpoints
-    // POST ${NEXT_PUBLIC_API_BASE}/auth/login or /auth/github
     try {
-      // Mock successful login after 1 second
-      await new Promise(resolve => setTimeout(resolve, 1000))
-      
-      // Store mock auth token
-      localStorage.setItem('auth_token', 'mock-jwt-token')
-      localStorage.setItem('user', JSON.stringify({
-        id: '1',
-        email: 'user@example.com',
-        name: 'Test User',
-        avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=32&h=32&fit=crop&crop=face'
-      }))
-      
-      setShowToast({ type: 'success', message: 'Successfully logged in!' })
-      
-      // Redirect to dashboard
-      setTimeout(() => {
-        router.push('/dashboard')
-      }, 500)
-      
+      await signIn.authenticateWithRedirect({
+        strategy: 'oauth_google',
+        redirectUrl: '/sso-callback',
+        redirectUrlComplete: '/dashboard'
+      })
     } catch (error) {
-      setShowToast({ type: 'error', message: 'Login failed. Please try again.' })
-    } finally {
+      setShowToast({ type: 'error', message: 'Google authentication failed. Please try again.' })
       setLoading(false)
+    }
+  }
+
+  const handleGithubAuth = async () => {
+    if (!signIn) return
+    
+    setLoading(true)
+    
+    try {
+      await signIn.authenticateWithRedirect({
+        strategy: 'oauth_github',
+        redirectUrl: '/sso-callback',
+        redirectUrlComplete: '/dashboard'
+      })
+    } catch (error) {
+      console.error("GitHub auth error:", error.errors || error);
+      setShowToast({ type: 'error', message: 'GitHub authentication failed. Please try again.' });
+      setLoading(false);
     }
   }
 
@@ -61,12 +66,12 @@ export default function AuthPage() {
 
           <div className="space-y-3">
             <SmallButton
-              onClick={() => handleLogin('github')}
+              onClick={handleGoogleAuth}
               loading={loading}
               className="w-full btn-primary"
             >
-              <Github className="w-3 h-3 mr-1" />
-              Continue with GitHub
+              <Mail className="w-3 h-3 mr-1" />
+              Continue with Google
             </SmallButton>
 
             <div className="relative">
@@ -79,13 +84,13 @@ export default function AuthPage() {
             </div>
 
             <SmallButton
-              onClick={() => handleLogin('email')}
+              onClick={handleGithubAuth}
               loading={loading}
               variant="secondary"
               className="w-full"
             >
-              <Mail className="w-3 h-3 mr-1" />
-              Continue with Email
+              <Github className="w-3 h-3 mr-1" />
+              Continue with GitHub
             </SmallButton>
           </div>
 
