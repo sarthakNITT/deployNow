@@ -3,6 +3,13 @@
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import AuthServer from './authServer'
+import {
+  SignInButton,
+  SignUpButton,
+  SignedIn,
+  SignedOut,
+  UserButton,
+} from '@clerk/nextjs'
 
 export function LandingHeader() {
   return (
@@ -33,6 +40,23 @@ export function LandingHeader() {
             transition={{ duration: 0.4, delay: 0.3 }}
           >
             <AuthServer/>
+            <SignedOut>
+              <SignInButton>
+                <button
+                  className="btn-sm btn-ghost hover:text-primary hover:bg-primary/10 transition-all duration-300 font-medium"
+                >
+                  Sign In
+                </button>
+              </SignInButton>
+              <SignUpButton>
+                <button className="btn-sm btn-primary hover:shadow-lg hover:shadow-primary/25 hover:scale-105 transition-all duration-300 font-medium">
+                  Sign Up
+                </button>
+              </SignUpButton>
+            </SignedOut>
+            <SignedIn>
+              <UserButton />
+            </SignedIn>
           </motion.div>
         </div>
       </div>
