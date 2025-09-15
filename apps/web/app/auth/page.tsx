@@ -5,7 +5,6 @@ import { motion } from 'framer-motion'
 import { Github, Mail, ArrowLeft } from 'lucide-react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { useSignIn } from '@clerk/nextjs'
 import { SmallButton } from '@/components/SmallButton'
 import { Toast } from '@/components/Toast'
 
@@ -13,43 +12,18 @@ export default function AuthPage() {
   const [loading, setLoading] = useState(false)
   const [showToast, setShowToast] = useState<{ type: 'success' | 'error', message: string } | null>(null)
   const router = useRouter()
-  const { signIn } = useSignIn()
+  const MailIcon = Mail as any
+  const GithubIcon = Github as any
+  const ArrowLeftIcon = ArrowLeft as any
 
   const handleGoogleAuth = async () => {
-    if (!signIn) return
-    
     setLoading(true)
-    
-    try {
-      await signIn.authenticateWithRedirect({
-        strategy: 'oauth_google',
-        redirectUrl: '/sso-callback',
-        redirectUrlComplete: '/dashboard'
-      })
-      router.push('/dashboard')
-    } catch (error) {
-      setShowToast({ type: 'error', message: 'Google authentication failed. Please try again.' })
-      setLoading(false)
-    }
+    router.push('/dashboard')
   }
 
   const handleGithubAuth = async () => {
-    if (!signIn) return
-    
     setLoading(true)
-    
-    try {
-      await signIn.authenticateWithRedirect({
-        strategy: 'oauth_github',
-        redirectUrl: '/sso-callback',
-        redirectUrlComplete: '/dashboard'
-      })
-      router.push('/dashboard')
-    } catch (error) {
-      console.error("GitHub auth error:", error.errors || error);
-      setShowToast({ type: 'error', message: 'GitHub authentication failed. Please try again.' });
-      setLoading(false);
-    }
+    router.push('/dashboard')
   }
 
   return (
@@ -72,7 +46,7 @@ export default function AuthPage() {
               loading={loading}
               className="w-full btn-primary"
             >
-              <Mail className="w-3 h-3 mr-1" />
+              <MailIcon className="w-3 h-3 mr-1" />
               Continue with Google
             </SmallButton>
 
@@ -91,7 +65,7 @@ export default function AuthPage() {
               variant="secondary"
               className="w-full"
             >
-              <Github className="w-3 h-3 mr-1" />
+              <GithubIcon className="w-3 h-3 mr-1" />
               Continue with GitHub
             </SmallButton>
           </div>
@@ -101,7 +75,7 @@ export default function AuthPage() {
               href="/"
               className="inline-flex items-center text-xs text-gray-400 hover:text-white transition-colors"
             >
-              <ArrowLeft className="w-3 h-3 mr-1" />
+              <ArrowLeftIcon className="w-3 h-3 mr-1" />
               Back to home
             </Link>
           </div>

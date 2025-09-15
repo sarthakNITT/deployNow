@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { motion } from 'framer-motion'
 import { Plus } from 'lucide-react'
+import React from 'react'
 import { RepoUpload } from '@/components/RepoUpload'
 import { ProjectCard } from '@/components/ProjectCard'
 import { DeployModal } from '@/components/DeployModal'
@@ -11,16 +12,14 @@ import { ActivityLog } from '@/components/ActivityLog'
 import { Toast } from '@/components/Toast'
 import { api } from '@/lib/api'
 import type { Deployment } from '@/lib/types'
-import { useUser } from '@clerk/nextjs'
+import { useRouter } from 'next/navigation'
 import { LandingHeader } from '@/components/LandingHeader'
 
 export default function DashboardPage() {
 
-  const { isLoaded, isSignedIn, user } = useUser()
-
-  if (!isLoaded || !isSignedIn) {
-    return null
-  }
+  const router = useRouter()
+  const PlusIcon = Plus as any
+  const MotionDiv = motion.div as any
   
   const [showUpload, setShowUpload] = useState(false)
   const [deployingProject, setDeployingProject] = useState<string | null>(null)
@@ -62,14 +61,14 @@ export default function DashboardPage() {
             onClick={() => setShowUpload(true)}
             className="btn-sm py-2 px-6 btn-primary inline-flex items-center gap-1"
           >
-            <Plus className="w-3 h-3" />
+            <PlusIcon className="w-3 h-3" />
             New Project
           </button>
         </div>
 
         {/* Upload Section */}
         {showUpload && (
-          <motion.div
+          <MotionDiv
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
@@ -79,7 +78,7 @@ export default function DashboardPage() {
               onSuccess={handleUploadSuccess}
               onCancel={() => setShowUpload(false)}
             />
-          </motion.div>
+          </MotionDiv>
         )}
 
         <div className="grid lg:grid-cols-3 gap-8">
@@ -99,7 +98,7 @@ export default function DashboardPage() {
               </div>
             ) : (
               <div className="space-y-3">
-                {deployments.map((deployment: Deployment) => (
+                {(deployments as Deployment[]).map((deployment: Deployment) => (
                   <ProjectCard
                     key={deployment.id}
                     deployment={deployment}

@@ -11,17 +11,12 @@ import { WhyChooseSection } from '@/components/WhyChooseSection'
 import { FAQSection } from '@/components/FAQSection'
 import { Footer } from '@/components/Footer'
 import { Typewriter } from 'react-simple-typewriter'
-import { useUser } from '@clerk/nextjs'
 import { useRouter } from 'next/navigation'
 
 export default function HomePage() {
-  const { isLoaded, isSignedIn, user } = useUser()
   const router = useRouter();
 
   async function handleGetStarted () {
-    if (!isLoaded || !isSignedIn) {
-      router.push("/auth")
-    }
     router.push("/dashboard")
   }
 

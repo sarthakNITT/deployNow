@@ -8,15 +8,10 @@ import { useParams, useRouter } from 'next/navigation'
 import { Navbar } from '@/components/Navbar'
 import { SmallButton } from '@/components/SmallButton'
 import { mockApi } from '@/lib/mockApi'
-import { useUser } from '@clerk/nextjs'
+import React from 'react'
 
 export default function ProjectPage() {
-  const { isLoaded, isSignedIn, user } = useUser();
   const router = useRouter();
-
-  if (!isLoaded || !isSignedIn) {
-    router.push("/auth");
-  }
 
   const params = useParams()
   const projectId = params.id as string

@@ -4,17 +4,12 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { ArrowLeft, Save, User, Key, Globe } from 'lucide-react'
 import Link from 'next/link'
-import { Navbar } from '@/components/Navbar'
 import { SmallButton } from '@/components/SmallButton'
 import { Toast } from '@/components/Toast'
-import { useUser } from '@clerk/nextjs'
+import React from 'react'
+import { LandingHeader } from '@/components/LandingHeader'
 
 export default function SettingsPage() {
-  const { isLoaded, isSignedIn, user } = useUser()
-
-  if (!isLoaded || !isSignedIn) {
-    return null
-  }
   
   const [activeTab, setActiveTab] = useState('account')
   const [toast, setToast] = useState<{ type: 'success' | 'error', message: string } | null>(null)
@@ -63,7 +58,7 @@ export default function SettingsPage() {
 
   return (
     <div className="min-h-screen bg-black">
-      <Navbar />
+      <LandingHeader/>
       
       <main className="max-w-4xl mx-auto px-6 py-8">
         {/* Back button */}
