@@ -10,13 +10,17 @@ import { ProjectCard } from '@/components/ProjectCard'
 import { DeployModal } from '@/components/DeployModal'
 import { ActivityLog } from '@/components/ActivityLog'
 import { Toast } from '@/components/Toast'
-import { useAuth } from '@/hooks/useAuth'
 import { api } from '@/lib/api'
 import type { Deployment } from '@/lib/types'
+import { useUser } from '@clerk/nextjs'
 
 export default function DashboardPage() {
 
-  useAuth() // Protect route
+  const { isLoaded, isSignedIn, user } = useUser()
+
+  if (!isLoaded || !isSignedIn) {
+    return null
+  }
   
   const [showUpload, setShowUpload] = useState(false)
   const [deployingProject, setDeployingProject] = useState<string | null>(null)

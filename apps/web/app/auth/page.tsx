@@ -26,6 +26,7 @@ export default function AuthPage() {
         redirectUrl: '/sso-callback',
         redirectUrlComplete: '/dashboard'
       })
+      router.push('/dashboard')
     } catch (error) {
       setShowToast({ type: 'error', message: 'Google authentication failed. Please try again.' })
       setLoading(false)
@@ -43,6 +44,7 @@ export default function AuthPage() {
         redirectUrl: '/sso-callback',
         redirectUrlComplete: '/dashboard'
       })
+      router.push('/dashboard')
     } catch (error) {
       console.error("GitHub auth error:", error.errors || error);
       setShowToast({ type: 'error', message: 'GitHub authentication failed. Please try again.' });

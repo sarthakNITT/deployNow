@@ -11,8 +11,20 @@ import { WhyChooseSection } from '@/components/WhyChooseSection'
 import { FAQSection } from '@/components/FAQSection'
 import { Footer } from '@/components/Footer'
 import { Typewriter } from 'react-simple-typewriter'
+import { useUser } from '@clerk/nextjs'
+import { useRouter } from 'next/navigation'
 
 export default function HomePage() {
+  const { isLoaded, isSignedIn, user } = useUser()
+  const router = useRouter();
+
+  async function handleGetStarted () {
+    if (!isLoaded || !isSignedIn) {
+      router.push("/auth")
+    }
+    router.push("/dashboard")
+  }
+
   return (
     <div className="min-h-screen bg-black relative">
       <LandingHeader />
@@ -61,13 +73,13 @@ export default function HomePage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
           >
-            <Link 
-              href="/auth"
+            <button 
+              onClick={handleGetStarted}
               className="text-[12px] inline-flex items-center gap-2 px-5 py-3 bg-primary hover:bg-primary/90 text-black font-semibold rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-primary/25 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-offset-2 focus:ring-offset-black"
             >
               Get Started
               <ArrowRight className="w-4 h-4" />
-            </Link>
+            </button>
           </motion.div>
         </div>
       </section>

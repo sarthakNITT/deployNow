@@ -7,10 +7,14 @@ import Link from 'next/link'
 import { Navbar } from '@/components/Navbar'
 import { SmallButton } from '@/components/SmallButton'
 import { Toast } from '@/components/Toast'
-import { useAuth } from '@/hooks/useAuth'
+import { useUser } from '@clerk/nextjs'
 
 export default function SettingsPage() {
-  useAuth() // Protect route
+  const { isLoaded, isSignedIn, user } = useUser()
+
+  if (!isLoaded || !isSignedIn) {
+    return null
+  }
   
   const [activeTab, setActiveTab] = useState('account')
   const [toast, setToast] = useState<{ type: 'success' | 'error', message: string } | null>(null)

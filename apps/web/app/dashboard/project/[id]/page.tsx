@@ -4,14 +4,20 @@ import { useQuery } from '@tanstack/react-query'
 import { motion } from 'framer-motion'
 import { ArrowLeft, ExternalLink, RefreshCw, Settings } from 'lucide-react'
 import Link from 'next/link'
-import { useParams } from 'next/navigation'
+import { useParams, useRouter } from 'next/navigation'
 import { Navbar } from '@/components/Navbar'
 import { SmallButton } from '@/components/SmallButton'
-import { useAuth } from '@/hooks/useAuth'
 import { mockApi } from '@/lib/mockApi'
+import { useUser } from '@clerk/nextjs'
 
 export default function ProjectPage() {
-  useAuth() // Protect route
+  const { isLoaded, isSignedIn, user } = useUser();
+  const router = useRouter();
+
+  if (!isLoaded || !isSignedIn) {
+    router.push("/auth");
+  }
+
   const params = useParams()
   const projectId = params.id as string
 
