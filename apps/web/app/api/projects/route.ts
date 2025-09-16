@@ -1,41 +1,56 @@
-import { NextRequest } from 'next/server'
-import { auth } from '@clerk/nextjs/server'
-import { client } from '@repo/db'
+import { client } from "@repo/db";
+import { NextRequest, NextResponse } from "next/server";
+import { currentUser } from "@clerk/nextjs/server"
 
-export async function POST(req: NextRequest) {
-  try {
-    const { userId } = await auth()
-    if (!userId) {
-      return new Response('Unauthorized', { status: 401 })
+export async function POST (req: NextRequest) {
+    try {
+        const body = await req.json();
+        const url = body?.url as string | undefined;
+        const projectId = body?.projectId as string | undefined;
+
+        if (!url) {
+            return NextResponse.json({ message: "Missing 'url' in body" }, { status: 400 });
+        }
+
+        const user = await currentUser();
+        if (!user) {
+            return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
+        }
+
+        const userIdFromAuth = user.id;
+        const email = user.emailAddresses?.[0]?.emailAddress ?? null;
+        const name = user.firstName && user.lastName ? `${user.firstName} ${user.lastName}` : user.firstName ?? null;
+
+        // Resolve a stable DB user id to satisfy the FK without violating the unique email constraint
+        let dbUserId = userIdFromAuth;
+        if (email) {
+            const existingByEmail = await client.user.findUnique({ where: { email } });
+            if (existingByEmail) {
+                dbUserId = existingByEmail.id;
+            } else {
+                await client.user.create({
+                    data: { id: dbUserId, email, name: name ?? undefined },
+                });
+            }
+        } else {
+            // No email available: ensure a user exists keyed by auth id; avoid touching email to keep uniqueness intact
+            await client.user.upsert({
+                where: { id: dbUserId },
+                update: { name: name ?? undefined },
+                create: { id: dbUserId, email: `${dbUserId}@placeholder.local`, name: name ?? undefined },
+            });
+        }
+
+        const created = await client.project.create({
+            data: {
+                url,
+                userId: dbUserId,
+            },
+        });
+
+        return NextResponse.json({ message: 'Project created', project: created }, { status: 201 });
+    } catch (error: any) {
+        console.error('Error creating project:', error);
+        return NextResponse.json({ message: 'Error creating project', error: String(error?.message ?? error) }, { status: 500 });
     }
-
-    const body = await req.json()
-    const projectId: string | undefined = body?.projectId
-    const url: string | undefined = body?.url
-
-    if (!projectId || !url) {
-      return new Response('Missing projectId or url', { status: 400 })
-    }
-
-    const project = await client.project.create({
-
-      data: ({
-        url,
-        projectId,
-        userId,
-      } as any),
-    })
-
-    return new Response(JSON.stringify(project), {
-      status: 201,
-      headers: { 'Content-Type': 'application/json' },
-    })
-  } catch (error: any) {
-    console.error('Failed to create project:', error)
-    // Surface Prisma error codes to help debugging (e.g., P2003 FK violation)
-    const message = error?.code ? `Prisma error ${error.code}: ${error.message}` : 'Internal Server Error'
-    return new Response(message, { status: 500 })
-  }
 }
-
-
