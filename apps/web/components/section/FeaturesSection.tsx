@@ -1,7 +1,6 @@
 'use client'
 
 import { MotionDiv } from '@/lib/utils'
-import { motion } from 'framer-motion'
 import { Zap, Shield, Globe, Code } from 'lucide-react'
 
 const features = [

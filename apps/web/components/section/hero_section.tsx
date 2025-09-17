@@ -2,7 +2,6 @@
 
 import { Typewriter } from "react-simple-typewriter";
 import { HeroBackground } from "../HeroBackground";
-import { motion } from 'framer-motion'
 import { useRouter } from "next/navigation";
 import { ArrowRight } from "lucide-react";
 import { MotionDiv, MotionH1, MotionP } from "@/lib/utils";

@@ -1,6 +1,5 @@
 "use client"
 
-import { motion } from 'framer-motion'
 import { StepShowcase } from '@/components/StepShowcase'
 import { MotionDiv } from '@/lib/utils'
 

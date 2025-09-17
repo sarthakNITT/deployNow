@@ -1,5 +1,6 @@
 'use client'
 
+import { MotionDiv } from '@/lib/utils'
 import { motion } from 'framer-motion'
 import { Clock, CheckCircle, AlertCircle, Upload } from 'lucide-react'
 
@@ -63,7 +64,7 @@ export function ActivityLog() {
           </div>
         ) : (
           activities.map((activity, index) => (
-            <motion.div
+            <MotionDiv
               key={activity.id}
               className="flex items-start gap-2 pb-3 border-b border-border last:border-b-0"
               initial={{ opacity: 0, x: -10 }}
@@ -79,7 +80,7 @@ export function ActivityLog() {
                   {formatTime(activity.timestamp)}
                 </p>
               </div>
-            </motion.div>
+            </MotionDiv>
           ))
         )}
       </div>

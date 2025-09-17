@@ -3,8 +3,9 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Upload, X, Github } from 'lucide-react'
-import { SmallButton } from './SmallButton'
+import { SmallButton } from '../SmallButton'
 import axios from 'axios'
+import { MotionDiv } from '@/lib/utils'
 
 interface Props {
   onSuccess: (project: { id: string, status: string }) => void
@@ -49,7 +50,7 @@ export function RepoUpload({ onSuccess, onCancel }: Props) {
   }
 
   return (
-    <motion.div
+    <MotionDiv
       initial={{ opacity: 0, scale: 0.95 }}
       animate={{ opacity: 1, scale: 1 }}
       className="card"
@@ -104,6 +105,6 @@ export function RepoUpload({ onSuccess, onCancel }: Props) {
           </SmallButton>
         </div>
       </div>
-    </motion.div>
+    </MotionDiv>
   )
 }

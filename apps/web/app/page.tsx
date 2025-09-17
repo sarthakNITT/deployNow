@@ -1,12 +1,12 @@
 'use client'
 
 import { LandingHeader } from '@/components/LandingHeader'
-import { FeaturesSection } from '@/components/FeaturesSection'
-import { WhyChooseSection } from '@/components/WhyChooseSection'
-import { FAQSection } from '@/components/FAQSection'
+import { FeaturesSection } from '@/components/section/FeaturesSection'
+import { WhyChooseSection } from '@/components/section/WhyChooseSection'
+import { FAQSection } from '@/components/section/FAQSection'
 import { Footer } from '@/components/Footer'
 import HeroSection from '@/components/section/hero_section'
-import StepShowcaseSection from '@/components/step_showcase_section'
+import StepShowcaseSection from '@/components/section/step_showcase_section'
 
 export default function HomePage() {
   return (
