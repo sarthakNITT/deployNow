@@ -1,3 +1,5 @@
+"use client"
+
 import { motion } from "framer-motion";
 import { Plus } from "lucide-react";
 import { Zap, Shield, Globe, Code, User, Key, Upload, CheckCircle,  } from 'lucide-react'
@@ -153,7 +155,7 @@ export const deployments = [
     id: '1',
     projectName: 'my-project',
     status: 'deployed' as const,
-    createdAt: new Date(Date.now() - 1000 * 60 * 30).toISOString(), // 30 min ago
+    createdAt: 17/9/2025,
     duration: '45s',
     commit: 'abc123f',
     message: 'Add new feature'
@@ -162,7 +164,7 @@ export const deployments = [
     id: '2',
     projectName: 'test-app', 
     status: 'deployed' as const,
-    createdAt: new Date(Date.now() - 1000 * 60 * 60 * 2).toISOString(), // 2 hours ago
+    createdAt: 17/9/2025,
     duration: '38s',
     commit: 'def456a',
     message: 'Fix bug in header'
