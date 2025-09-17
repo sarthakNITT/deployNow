@@ -1,5 +1,6 @@
 'use client'
 
+import { MotionDiv } from '@/lib/utils'
 import { motion } from 'framer-motion'
 import { Zap, Shield, Globe, Code } from 'lucide-react'
 
@@ -30,7 +31,7 @@ export function FeaturesSection() {
   return (
     <section className="py-16 px-6">
       <div className="max-w-4xl mx-auto">
-        <motion.div 
+        <MotionDiv
           className="text-center mb-12"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -43,11 +44,11 @@ export function FeaturesSection() {
           <p className="text-gray-400 text-sm">
             Simple deployment with powerful features
           </p>
-        </motion.div>
+        </MotionDiv>
         
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {features.map((feature, index) => (
-            <motion.div
+            <MotionDiv
               key={feature.title}
               className="text-center"
               initial={{ opacity: 0, y: 20 }}
@@ -60,7 +61,7 @@ export function FeaturesSection() {
               </div>
               <h3 className="text-sm font-semibold mb-2">{feature.title}</h3>
               <p className="text-gray-400 text-xs">{feature.description}</p>
-            </motion.div>
+            </MotionDiv>
           ))}
         </div>
       </div>

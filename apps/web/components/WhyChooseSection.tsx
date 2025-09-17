@@ -1,6 +1,6 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { MotionDiv } from '@/lib/utils'
 
 const benefits = [
   'No configuration required',
@@ -15,7 +15,7 @@ export function WhyChooseSection() {
   return (
     <section className="py-16 px-6 bg-surface/20">
       <div className="max-w-4xl mx-auto">
-        <motion.div 
+        <MotionDiv
           className="text-center mb-12"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -28,10 +28,10 @@ export function WhyChooseSection() {
           <p className="text-gray-400 text-sm max-w-2xl mx-auto">
             Focus on building great products while we handle the deployment complexity
           </p>
-        </motion.div>
+        </MotionDiv>
         
         <div className="grid md:grid-cols-2 gap-8">
-          <motion.div
+          <MotionDiv
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
@@ -50,9 +50,9 @@ export function WhyChooseSection() {
                 </li>
               ))}
             </ul>
-          </motion.div>
+          </MotionDiv>
           
-          <motion.div
+          <MotionDiv
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
@@ -71,7 +71,7 @@ export function WhyChooseSection() {
                 </li>
               ))}
             </ul>
-          </motion.div>
+          </MotionDiv>
         </div>
       </div>
     </section>

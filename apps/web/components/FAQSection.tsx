@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ChevronDown } from 'lucide-react'
+import { MotionDiv } from '@/lib/utils'
 
 const faqs = [
   {
@@ -33,7 +34,7 @@ export function FAQSection() {
   return (
     <section className="py-16 px-6">
       <div className="max-w-3xl mx-auto">
-        <motion.div 
+        <MotionDiv
           className="text-center mb-12"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -46,11 +47,11 @@ export function FAQSection() {
           <p className="text-gray-400 text-sm">
             Everything you need to know about our platform
           </p>
-        </motion.div>
+        </MotionDiv>
         
         <div className="space-y-3">
           {faqs.map((faq, index) => (
-            <motion.div
+            <MotionDiv
               key={index}
               className="border border-border rounded-lg overflow-hidden"
               initial={{ opacity: 0, y: 10 }}
@@ -72,7 +73,7 @@ export function FAQSection() {
               
               <AnimatePresence>
                 {openIndex === index && (
-                  <motion.div
+                  <MotionDiv
                     initial={{ height: 0, opacity: 0 }}
                     animate={{ height: 'auto', opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
@@ -82,10 +83,10 @@ export function FAQSection() {
                     <div className="px-4 pb-3 text-sm text-gray-400 border-t border-border pt-3">
                       {faq.answer}
                     </div>
-                  </motion.div>
+                  </MotionDiv>
                 )}
               </AnimatePresence>
-            </motion.div>
+            </MotionDiv>
           ))}
         </div>
       </div>

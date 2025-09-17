@@ -8,13 +8,14 @@ const FloatingShape = ({
   left = '0%',
   top = '0%'
 }) => {
-  // Generate random movement values
-  const randomMoveX = Math.random() * 80 - 40; // -40 to 40
-  const randomMoveY = Math.random() * 80 - 40; // -40 to 40
-  const randomRotate = Math.random() * 720 - 360; // -360 to 360
+  const randomMoveX = Math.random() * 80 - 40;
+  const randomMoveY = Math.random() * 80 - 40;
+  const randomRotate = Math.random() * 720 - 360;
+
+  const MotionDiv = motion.div as any
   
   return (
-    <motion.div
+    <MotionDiv
       className="absolute rounded-full opacity-15"
       style={{
         width: '120px',
@@ -43,10 +44,8 @@ const FloatingShape = ({
 export function HeroBackground() {
   return (
     <div className="fixed inset-0 overflow-hidden pointer-events-none">
-      {/* Animated gradient background */}
       <div className="hero-bg absolute inset-0" />
       
-      {/* Random positioned circles */}
       <FloatingShape delay={0} duration={15} left="15%" top="20%" />
       <FloatingShape delay={2} duration={18} left="85%" top="15%" />
       <FloatingShape delay={4} duration={12} left="20%" top="80%" />
