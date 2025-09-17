@@ -1,30 +1,6 @@
 'use client'
 
-import { MotionDiv } from '@/lib/utils'
-import { Zap, Shield, Globe, Code } from 'lucide-react'
-
-const features = [
-  {
-    icon: Zap,
-    title: 'Lightning Fast',
-    description: 'Deploy in seconds with optimized builds'
-  },
-  {
-    icon: Shield,
-    title: 'Secure by Default',
-    description: 'HTTPS and security headers included'
-  },
-  {
-    icon: Globe,
-    title: 'Global CDN',
-    description: 'Worldwide edge network for speed'
-  },
-  {
-    icon: Code,
-    title: 'Git Integration',
-    description: 'Connect any GitHub repository'
-  }
-]
+import { features, MotionDiv } from '@/lib/utils'
 
 export function FeaturesSection() {
   return (

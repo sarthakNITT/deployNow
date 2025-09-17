@@ -1,8 +1,14 @@
 "use client"
 
 import { PlusIcon } from "@/lib/utils"
+import { useUploadStore } from "@/store/upload";
 
 export default function DashboardHeader () {
+    
+    const {
+        setShowUpload
+    } = useUploadStore();
+
     return (
         <div className="flex justify-between items-center mb-8">
             <div>

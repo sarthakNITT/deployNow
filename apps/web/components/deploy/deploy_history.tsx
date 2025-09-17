@@ -1,3 +1,5 @@
+import { deployments, MotionDiv } from "@/lib/utils";
+
 export default function DeployHistory () {
     return (
         <section>
@@ -6,7 +8,7 @@ export default function DeployHistory () {
             </h2>
             <div className="space-y-3">
             {deployments.map((deployment) => (
-                <motion.div
+                <MotionDiv
                 key={deployment.id}
                 className="card flex items-center justify-between"
                 initial={{ opacity: 0, y: 10 }}
@@ -26,7 +28,7 @@ export default function DeployHistory () {
                     {new Date(deployment.createdAt).toLocaleDateString()}
                     </div>
                 </div>
-                </motion.div>
+                </MotionDiv>
             ))}
             </div>
         </section>

@@ -66,7 +66,6 @@ export function DashboardScreenshot({ type }: Props) {
 
   return (
     <div className="p-4 bg-black min-h-[200px]">
-      {/* Mock navbar */}
       <div className="flex justify-between items-center mb-4 pb-2 border-b border-gray-800">
         <div className="font-semibold text-sm">Dashboard</div>
         <div className="w-6 h-6 bg-gray-700 rounded-full" />

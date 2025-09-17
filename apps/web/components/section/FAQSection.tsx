@@ -3,30 +3,7 @@
 import { useState } from 'react'
 import { AnimatePresence } from 'framer-motion'
 import { ChevronDown } from 'lucide-react'
-import { MotionDiv } from '@/lib/utils'
-
-const faqs = [
-  {
-    question: 'How fast are deployments?',
-    answer: 'Most deployments complete in under 30 seconds. Build times vary based on your project size and complexity.'
-  },
-  {
-    question: 'What frameworks are supported?',
-    answer: 'We support all major frontend frameworks including React, Vue, Angular, Svelte, and static sites.'
-  },
-  {
-    question: 'Can I use custom domains?',
-    answer: 'Yes, you can connect custom domains with automatic HTTPS certificates included at no extra cost.'
-  },
-  {
-    question: 'Is there a free tier?',
-    answer: 'Yes, our free tier includes unlimited personal projects with generous bandwidth and build minutes.'
-  },
-  {
-    question: 'How do I rollback deployments?',
-    answer: 'Every deployment is versioned. You can instantly rollback to any previous version with one click.'
-  }
-]
+import { faqs, MotionDiv } from '@/lib/utils'
 
 export function FAQSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(null)

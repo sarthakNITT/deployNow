@@ -1,0 +1,48 @@
+import { activeTabType, uploadInterface } from "@/lib/utils";
+import { create } from "zustand";
+
+export const useUploadStore = create<uploadInterface>()((set) => ({
+    showUpload: false,
+    deployingProject: null,
+    toast: null,
+    activeTab: 'account',
+    accountData: {
+        name: 'Test User',
+        email: 'user@example.com',
+        avatar: ''
+    },
+    projectSettings: {
+        buildCommand: 'npm run build',
+        outputDirectory: 'dist',
+        nodeVersion: '18.x'
+    },
+    envVars: [
+        { key: 'NODE_ENV', value: 'production' },
+        { key: 'API_URL', value: 'https://api.example.com' }
+    ],
+    projectId: null,
+
+    setShowUpload: (value: boolean) => set({ showUpload: value }),
+    setDeployingProject: (value: string | null) => set({ deployingProject: value }),
+    setToast:  (value: { type: 'success' | 'error', message: string } | null) => set({ toast: value }),
+    setActiveTab:  (value: activeTabType) => set({ activeTab: value }),
+    setAccountData: (value) => set({ accountData: value }),
+    setProjectSettings: (value) => set({ projectSettings: value }),
+    setEnvVars: (value) => set({ envVars: value }),
+    setProjectId: (value) => set({ projectId: value }),
+    addEnvVar: () => set((state) => ({ envVars: [...state.envVars, { key: '', value: '' }] })),
+    updateEnvVar: (index, field, value) => set((state) => {
+        const updated = [...state.envVars];
+        const current = updated[index];
+        if (!current) return { envVars: updated };
+        const nextItem = { key: current.key, value: current.value };
+        if (field === 'key') {
+            nextItem.key = value;
+        } else {
+            nextItem.value = value;
+        }
+        updated[index] = nextItem;
+        return { envVars: updated };
+    }),
+    removeEnvVar: (index) => set((state) => ({ envVars: state.envVars.filter((_, i) => i !== index) })),
+}))

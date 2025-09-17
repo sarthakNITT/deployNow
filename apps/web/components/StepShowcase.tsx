@@ -1,30 +1,7 @@
 'use client'
 
-import { motion } from 'framer-motion'
-import { Upload, CheckCircle, Globe } from 'lucide-react'
 import { DashboardScreenshot } from './DashboardScreenshot'
-import { MotionDiv } from '@/lib/utils'
-
-const steps = [
-  {
-    title: 'Upload Repository',
-    description: 'Connect your GitHub repo with a simple URL',
-    icon: Upload,
-    screenshot: 'upload'
-  },
-  {
-    title: 'Build & Process',
-    description: 'We automatically build and optimize your project',
-    icon: CheckCircle,
-    screenshot: 'success'
-  },
-  {
-    title: 'Deploy Live',
-    description: 'Get a live URL to share your project instantly',
-    icon: Globe,
-    screenshot: 'deploy'
-  }
-]
+import { MotionDiv, steps } from '@/lib/utils'
 
 export function StepShowcase() {
   return (

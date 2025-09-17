@@ -1,14 +1,15 @@
 import type { Deployment } from '@/lib/types'
-import { api } from '@/lib/api'
 import { ProjectCard } from '../ProjectCard'
 import { useQuery } from '@tanstack/react-query'
+import { useUploadStore } from '@/store/upload';
+import { deployments } from '@/lib/utils';
 
 export default function ProjectGrid () {
 
-    const { data: deployments = [], refetch: refetchDeployments } = useQuery({
-      queryKey: ['deployments'],
-      queryFn: api.getDeployments,
-    })
+  const {
+    setShowUpload,
+    setDeployingProject
+  } = useUploadStore();
 
     const handleDeploy = (projectId: string) => {
       setDeployingProject(projectId)

@@ -1,4 +1,13 @@
+import { tabs } from "@/lib/utils";
+import { useUploadStore } from "@/store/upload";
+
 export default function SettingsNavbar () {
+
+  const {
+    activeTab, 
+    setActiveTab
+  } = useUploadStore();
+
     return (
         <div className="lg:col-span-1">
             <nav className="space-y-1">

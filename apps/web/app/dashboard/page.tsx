@@ -1,6 +1,5 @@
 'use client'
 
-import { useState, useEffect } from 'react'
 import React from 'react'
 import { DeployModal } from '@/components/DeployModal'
 import { ActivityLog } from '@/components/ActivityLog'
@@ -9,13 +8,20 @@ import { LandingHeader } from '@/components/LandingHeader'
 import DashboardHeader from '@/components/dashboard/header'
 import ShowUpload from '@/components/dashboard/show_upload'
 import ProjectGrid from '@/components/dashboard/project_grid'
+import { useUploadStore } from '@/store/upload'
+import { getDeployData } from '@/lib/utils'
 
 export default function DashboardPage() {
   
-  const [showUpload, setShowUpload] = useState(false)
-  const [deployingProject, setDeployingProject] = useState<string | null>(null)
-  const [toast, setToast] = useState<{ type: 'success' | 'error', message: string } | null>(null)
+  const {
+    showUpload, 
+    deployingProject, 
+    toast, 
+    setDeployingProject, 
+    setToast 
+  } = useUploadStore();
   
+  const refetchDeployments = getDeployData().refetchDeployments;
 
   const handleDeployComplete = () => {
     setDeployingProject(null)

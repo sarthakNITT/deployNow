@@ -1,15 +1,19 @@
+"use client"
 import { SmallButton } from "@/components/SmallButton";
+import { getProjectId } from "@/lib/utils";
 import { ExternalLink, RefreshCw, Settings } from "lucide-react";
 
 export default function ProjectHeader () {
+  const project = getProjectId();
+  
     return (
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
           <div>
-            <h1 className="text-2xl font-bold mb-2">{project.name}</h1>
+            <h1 className="text-2xl font-bold mb-2">{project?.name ?? 'project'}</h1>
             <div className="flex items-center gap-4 text-sm text-gray-400">
-              <span>Branch: {project.branch}</span>
+              <span>Branch: {project?.branch ?? '-'}</span>
               <span>•</span>
-              <span>Framework: {project.framework}</span>
+              <span>Framework: {project?.framework ?? '-'}</span>
             </div>
           </div>
           
@@ -30,7 +34,7 @@ export default function ProjectHeader () {
               Settings
             </SmallButton>
             
-            {project.url && (
+            {project?.url && (
               <SmallButton
                 variant="primary"
                 className="inline-flex items-center gap-2"

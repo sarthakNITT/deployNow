@@ -1,4 +1,9 @@
+import { getProjectId } from "@/lib/utils";
+
 export default function EnvironmentVariables () {
+
+  const project = getProjectId();
+
     return (
       <section>
         <h3 className="text-lg font-semibold mb-4">Environment</h3>

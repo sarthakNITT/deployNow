@@ -1,4 +1,12 @@
+import { useUploadStore } from "@/store/upload"
+
 export default function ProjectsTab () {
+
+    const {
+        projectSettings,
+        setProjectSettings
+    } = useUploadStore();
+
     return (
         <div>
             <h2 className="text-lg font-semibold mb-4">Project Settings</h2>

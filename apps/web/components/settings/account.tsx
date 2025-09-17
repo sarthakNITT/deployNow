@@ -1,4 +1,12 @@
+import { useUploadStore } from "@/store/upload";
+
 export default function Account () {
+
+    const {
+        accountData,
+        setAccountData
+    } = useUploadStore();
+
     return (
         <div>
             <h2 className="text-lg font-semibold mb-4">Account Settings</h2>

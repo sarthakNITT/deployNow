@@ -1,6 +1,19 @@
+import { useUploadStore } from "@/store/upload";
 import { SmallButton } from "../SmallButton";
 
 export default function EnvironmentTab () {
+
+    const {
+        envVars,
+        updateEnvVar,
+        removeEnvVar,
+        setEnvVars
+    } = useUploadStore();
+
+    const addEnvVar = () => {
+        setEnvVars([...envVars, { key: '', value: '' }])
+    }
+
     return (
         <div>
             <h2 className="text-lg font-semibold mb-4">Environment Variables</h2>

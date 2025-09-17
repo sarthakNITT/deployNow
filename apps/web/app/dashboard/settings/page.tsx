@@ -1,7 +1,5 @@
 'use client'
 
-import { useState } from 'react'
-import { User, Key, Globe } from 'lucide-react'
 import { Toast } from '@/components/Toast'
 import React from 'react'
 import { LandingHeader } from '@/components/LandingHeader'
@@ -13,52 +11,15 @@ import Account from '@/components/settings/account'
 import ProjectsTab from '@/components/settings/projects'
 import EnvironmentTab from '@/components/settings/environment'
 import SaveButton from '@/components/settings/save_button'
+import { useUploadStore } from '@/store/upload'
 
 export default function SettingsPage() {
-  
-  const [activeTab, setActiveTab] = useState('account')
-  const [toast, setToast] = useState<{ type: 'success' | 'error', message: string } | null>(null)
-  
-  const [accountData, setAccountData] = useState({
-    name: 'Test User',
-    email: 'user@example.com',
-    avatar: ''
-  })
-  
-  const [projectSettings, setProjectSettings] = useState({
-    buildCommand: 'npm run build',
-    outputDirectory: 'dist',
-    nodeVersion: '18.x'
-  })
-  
-  const [envVars, setEnvVars] = useState([
-    { key: 'NODE_ENV', value: 'production' },
-    { key: 'API_URL', value: 'https://api.example.com' }
-  ])
 
-  const handleSave = () => {
-    setToast({ type: 'success', message: 'Settings saved successfully!' })
-  }
-
-  const addEnvVar = () => {
-    setEnvVars([...envVars, { key: '', value: '' }])
-  }
-
-  const updateEnvVar = (index: number, field: 'key' | 'value', value: string) => {
-    const updated = [...envVars]
-    updated[index][field] = value
-    setEnvVars(updated)
-  }
-
-  const removeEnvVar = (index: number) => {
-    setEnvVars(envVars.filter((_, i) => i !== index))
-  }
-
-  const tabs = [
-    { id: 'account', label: 'Account', icon: User },
-    { id: 'projects', label: 'Projects', icon: Globe },
-    { id: 'environment', label: 'Environment', icon: Key }
-  ]
+  const {
+    activeTab, 
+    toast, 
+    setToast
+  } = useUploadStore();
 
   return (
     <div className="min-h-screen bg-black">

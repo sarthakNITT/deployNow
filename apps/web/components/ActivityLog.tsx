@@ -1,34 +1,11 @@
 'use client'
 
-import { MotionDiv } from '@/lib/utils'
+import { activities, MotionDiv } from '@/lib/utils'
 import { motion } from 'framer-motion'
 import { Clock, CheckCircle, AlertCircle, Upload } from 'lucide-react'
 
-const activities = [
-  {
-    id: '1',
-    type: 'deploy',
-    message: 'Deployed my-project to production',
-    timestamp: new Date(Date.now() - 1000 * 60 * 5).toISOString(), // 5 min ago
-    status: 'success'
-  },
-  {
-    id: '2',
-    type: 'upload',
-    message: 'Uploaded new-feature repository',
-    timestamp: new Date(Date.now() - 1000 * 60 * 15).toISOString(), // 15 min ago
-    status: 'success'
-  },
-  {
-    id: '3',
-    type: 'deploy',
-    message: 'Deployment failed for test-app',
-    timestamp: new Date(Date.now() - 1000 * 60 * 30).toISOString(), // 30 min ago
-    status: 'error'
-  }
-]
-
 export function ActivityLog() {
+  
   const getIcon = (type: string, status: string) => {
     if (type === 'upload') {
       return <Upload className="w-4 h-4 text-primary" />

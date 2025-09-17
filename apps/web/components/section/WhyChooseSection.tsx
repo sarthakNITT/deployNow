@@ -1,15 +1,6 @@
 'use client'
 
-import { MotionDiv } from '@/lib/utils'
-
-const benefits = [
-  'No configuration required',
-  'Automatic HTTPS certificates',
-  'Real-time deployment logs',
-  'Instant rollbacks',
-  'Custom domains supported',
-  'Zero downtime deployments'
-]
+import { benefits, MotionDiv } from '@/lib/utils'
 
 export function WhyChooseSection() {
   return (
