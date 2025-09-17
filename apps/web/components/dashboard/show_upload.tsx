@@ -8,6 +8,7 @@ export default function ShowUpload () {
     setToast,
     setShowUpload
   } = useUploadStore();
+  
   const refetchDeployments = getDeployData().refetchDeployments;
 
   const handleUploadSuccess = (project: { id: string, status: string }) => {

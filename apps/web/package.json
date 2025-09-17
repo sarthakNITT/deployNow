@@ -10,6 +10,7 @@
     "check-types": "tsc --noEmit"
   },
   "dependencies": {
+    "@repo/aws-clilent": "*",
     "@instantdb/react": "^0.21.16",
     "@repo/db": "*",
     "@repo/ui": "*",

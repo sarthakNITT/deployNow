@@ -36,7 +36,9 @@ export function RepoUpload({ onSuccess, onCancel }: Props) {
         url: repoUrl
       });
 
-      await axios.post(`http://localhost:3003/api/projects`, {
+      console.log(response);
+
+      await axios.post(`/api/projects`, {
         url: repoUrl,
         projectId: response.data.id
       })

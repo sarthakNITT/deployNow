@@ -65,7 +65,7 @@ export function ProjectCard({ deployment, onDeploy }: Props) {
             )}
             <div className="flex items-center gap-1">
               <Clock className="w-2 h-2" />
-              <span>{new Date(deployment.createdAt).toLocaleDateString()}</span>
+              <span>17/9/2025</span>
             </div>
           </div>
         </div>
