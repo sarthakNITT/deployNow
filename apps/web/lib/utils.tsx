@@ -151,6 +151,7 @@ export const tabs = [
 export const deployments = [
   {
     id: '1',
+    projectName: 'my-project',
     status: 'deployed' as const,
     createdAt: new Date(Date.now() - 1000 * 60 * 30).toISOString(), // 30 min ago
     duration: '45s',
@@ -158,7 +159,8 @@ export const deployments = [
     message: 'Add new feature'
   },
   {
-    id: '2', 
+    id: '2',
+    projectName: 'test-app', 
     status: 'deployed' as const,
     createdAt: new Date(Date.now() - 1000 * 60 * 60 * 2).toISOString(), // 2 hours ago
     duration: '38s',

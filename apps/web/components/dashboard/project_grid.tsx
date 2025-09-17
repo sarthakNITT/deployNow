@@ -1,6 +1,5 @@
 import type { Deployment } from '@/lib/types'
 import { ProjectCard } from '../ProjectCard'
-import { useQuery } from '@tanstack/react-query'
 import { useUploadStore } from '@/store/upload';
 import { deployments } from '@/lib/utils';
 

@@ -6,6 +6,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { SmallButton } from './SmallButton'
 import type { Deployment } from '@/lib/types'
+import { MotionDiv } from '@/lib/utils'
 
 interface Props {
   deployment: Deployment
@@ -26,7 +27,7 @@ export function ProjectCard({ deployment, onDeploy }: Props) {
   }
 
   return (
-    <motion.div
+    <MotionDiv
       className="card hover:bg-surface/80 transition-colors"
       whileHover={{ scale: 1.02 }}
       transition={{ duration: 0.2 }}
@@ -108,7 +109,7 @@ export function ProjectCard({ deployment, onDeploy }: Props) {
             </SmallButton>
 
             {showMenu && (
-              <motion.div
+              <MotionDiv
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 className="absolute right-0 mt-1 w-28 bg-surface border border-border rounded shadow-lg z-10"
@@ -123,11 +124,11 @@ export function ProjectCard({ deployment, onDeploy }: Props) {
                     Delete
                   </button>
                 </div>
-              </motion.div>
+              </MotionDiv>
             )}
           </div>
         </div>
       </div>
-    </motion.div>
+    </MotionDiv>
   )
 }
