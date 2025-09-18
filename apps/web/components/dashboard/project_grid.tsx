@@ -1,5 +1,4 @@
 "use client";
-import type { Deployment } from '@/lib/types'
 import { ProjectCard } from '../ProjectCard'
 import { useUploadStore } from '@/store/upload';
 import getProjects from '@/lib/helperFunctions/getprojects';
@@ -67,7 +66,7 @@ export default function ProjectGrid () {
               </div>
             ))}
           </div>
-        ) : deployments.length === 0 ? (
+        ) : deployments?.length === 0? (
           <div className="card text-center py-8">
             <p className="text-gray-400 mb-3 text-xs">No projects yet</p>
             <button
@@ -79,7 +78,7 @@ export default function ProjectGrid () {
           </div>
         ) : (
           <div className="space-y-3">
-            {(deployments as Deployment[]).map((deployment: Deployment) => (
+            {(Array.isArray(deployments) ? deployments : []).map((deployment) => (
               <ProjectCard
                 key={deployment.id}
                 deployment={deployment}

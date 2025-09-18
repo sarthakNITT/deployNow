@@ -1,11 +1,9 @@
 import { publisher } from '..';
 
-export default function RedisPublisher(id: string) {
-  publisher.lPush('build-queue', id).then(() => {
-    console.log('LPush Completed');
-  });
+export default async function RedisPublisher(id: string): Promise<void> {
+  await publisher.lPush('build-queue', id);
+  console.log('LPush Completed');
 
-  publisher.hSet('status', id, 'uploaded').then(() => {
-    console.log('HSet completed');
-  });
+  await publisher.hSet('status', id, 'uploaded');
+  console.log('HSet completed');
 }

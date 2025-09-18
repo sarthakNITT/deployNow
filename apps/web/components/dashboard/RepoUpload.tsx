@@ -42,6 +42,15 @@ export function RepoUpload({ onSuccess, onCancel }: Props) {
         url: repoUrl,
         projectId: response.data.id
       })
+
+      // trigger polling in upload-service to update DB when deployed/failed
+      try {
+        void axios.get(`http://localhost:3000/api/v1/status`, {
+          params: { id: response.data.id, poll: true }
+        })
+      } catch (e) {
+        console.log('Failed to trigger polling', e)
+      }
       
       onSuccess({ id: response.data.id, status: 'pending' });
     } catch (err: any) {

@@ -1,4 +1,4 @@
-import { MotionDiv } from "@/lib/utils";
+import { logs, MotionDiv } from "@/lib/utils";
 
 export default function DeployLogs () {
     return (

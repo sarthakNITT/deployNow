@@ -4,7 +4,7 @@ import { create } from "zustand";
 
 export const useUploadStore = create<uploadInterface>()((set) => ({
     showUpload: false,
-    deployingProject: null,
+    deployingProject: "5f47f0f8-ac30-4883-8097-a28826c0a527",
     toast: null,
     activeTab: 'account',
     accountData: {

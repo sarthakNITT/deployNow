@@ -61,7 +61,7 @@ export interface uploadInterface {
   projectSettings: ProjectSettings
   envVars: EnvVar[]
   projectId: string | null
-  deployments: any[]
+  deployments: any[] | null
   loading: boolean
   
   setShowUpload: (value: boolean) => void

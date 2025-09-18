@@ -17,7 +17,7 @@ interface Props {
 
 export function DeployModal({ projectId, onClose, onComplete }: Props) {
   const [deployId, setDeployId] = useState<string | null>(null)
-  const [status, setStatus] = useState<'starting' | 'building' | 'deployed' | 'failed'>('starting')
+  const [status, setStatus] = useState<'starting' | 'queued' | 'building' | 'deployed' | 'failed'>('starting')
   const [progress, setProgress] = useState(0)
   const [logs, setLogs] = useState<string[]>(['Starting deployment...'])
 
@@ -40,7 +40,7 @@ export function DeployModal({ projectId, onClose, onComplete }: Props) {
     () => deployId ? api.getDeployStatus(deployId) : null,
     {
       interval: 2000,
-      enabled: deployId && status !== 'deployed' && status !== 'failed',
+      enabled: Boolean(deployId) && status !== 'deployed' && status !== 'failed',
     }
   )
 
@@ -67,14 +67,20 @@ export function DeployModal({ projectId, onClose, onComplete }: Props) {
         animate={{ opacity: 1, scale: 1 }}
         className="bg-surface border border-border rounded-lg w-full max-w-2xl max-h-[80vh] overflow-hidden"
       >
-        <DeployHeader onClose={onClose} status={status}/>
+        {(() => {
+          const displayStatus: 'starting' | 'building' | 'deployed' | 'failed' = status === 'queued' ? 'starting' : status
+          return <DeployHeader onClose={onClose} status={displayStatus}/>
+        })()}
 
         {status === 'building' && (
           <ProgressBar/>
         )}
 
         <DeployLogs/>
-        <DeployFooter onClose={onClose} status={status}/>
+        {(() => {
+          const displayStatus: 'starting' | 'building' | 'deployed' | 'failed' = status === 'queued' ? 'starting' : status
+          return <DeployFooter onClose={onClose} status={displayStatus}/>
+        })()}
       </MotionDiv>
     </div>
   )
