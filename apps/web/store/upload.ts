@@ -23,7 +23,7 @@ export const useUploadStore = create<uploadInterface>()((set) => ({
     ],
     projectId: null,
     deployments: [],
-    loading: false,
+    loading: true,
 
     setShowUpload: (value: boolean) => set({ showUpload: value }),
     setDeployingProject: (value: string | null) => set({ deployingProject: value }),
