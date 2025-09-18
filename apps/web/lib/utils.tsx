@@ -42,6 +42,16 @@ export interface EnvVar {
   value: string
 }
 
+type deploymentType = {
+  id: string,
+  url: string,
+  projectId: string,
+  status: string,
+  createdAt: Date,
+  updatedAt: Date,
+  userId: string
+}
+
 export interface uploadInterface {
   showUpload: boolean
   deployingProject: string | null
@@ -51,6 +61,8 @@ export interface uploadInterface {
   projectSettings: ProjectSettings
   envVars: EnvVar[]
   projectId: string | null
+  deployments: any[]
+  loading: boolean
   
   setShowUpload: (value: boolean) => void
   setDeployingProject: (value: string | null) => void
@@ -60,6 +72,8 @@ export interface uploadInterface {
   setProjectSettings: (value: ProjectSettings) => void
   setEnvVars: (value: EnvVar[]) => void
   setProjectId: (value: string | null) => void
+  setLoading: (value: boolean) => void
+  setDeployments: (value: any[]) => void
   addEnvVar: () => void
   updateEnvVar: (index: number, field: 'key' | 'value', value: string) => void
   removeEnvVar: (index: number) => void

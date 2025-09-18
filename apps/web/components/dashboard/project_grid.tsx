@@ -1,14 +1,27 @@
+"use client";
 import type { Deployment } from '@/lib/types'
 import { ProjectCard } from '../ProjectCard'
 import { useUploadStore } from '@/store/upload';
-import { deployments } from '@/lib/utils';
+import getProjects from '@/lib/helperFunctions/getprojects';
 
 export default function ProjectGrid () {
 
   const {
+    loading,
+    deployments,
+    setDeployments,
+    setLoading,
     setShowUpload,
     setDeployingProject
   } = useUploadStore();
+
+  setLoading(true);
+  const response = getProjects();
+  response.then((data) => {
+    console.log(data);
+    setDeployments(data);
+    setLoading(false);
+  })
 
     const handleDeploy = (projectId: string) => {
       setDeployingProject(projectId)

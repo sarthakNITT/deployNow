@@ -6,6 +6,7 @@ import Link from 'next/link'
 import { SmallButton } from './SmallButton'
 import type { Deployment } from '@/lib/types'
 import { MotionDiv } from '@/lib/utils'
+import { useUploadStore } from '@/store/upload'
 
 interface Props {
   deployment: Deployment
@@ -13,6 +14,10 @@ interface Props {
 }
 
 export function ProjectCard({ deployment, onDeploy }: Props) {
+  const {
+    loading
+  } = useUploadStore();
+
   const [showMenu, setShowMenu] = useState(false)
 
   const getStatusColor = (status: string) => {
@@ -40,6 +45,9 @@ export function ProjectCard({ deployment, onDeploy }: Props) {
             >
               {deployment.projectName}
             </Link>
+            <span className="text-xs text-gray-400">
+              ID: {deployment.id}
+            </span>
             <span className={`status-badge ${getStatusColor(deployment.status)}`}>
               {deployment.status}
             </span>

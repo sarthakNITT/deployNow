@@ -1,4 +1,5 @@
 import { activeTabType, uploadInterface } from "@/lib/utils";
+import type { Deployment } from '@/lib/types';
 import { create } from "zustand";
 
 export const useUploadStore = create<uploadInterface>()((set) => ({
@@ -21,6 +22,8 @@ export const useUploadStore = create<uploadInterface>()((set) => ({
         { key: 'API_URL', value: 'https://api.example.com' }
     ],
     projectId: null,
+    deployments: [],
+    loading: false,
 
     setShowUpload: (value: boolean) => set({ showUpload: value }),
     setDeployingProject: (value: string | null) => set({ deployingProject: value }),
@@ -30,6 +33,8 @@ export const useUploadStore = create<uploadInterface>()((set) => ({
     setProjectSettings: (value) => set({ projectSettings: value }),
     setEnvVars: (value) => set({ envVars: value }),
     setProjectId: (value) => set({ projectId: value }),
+    setDeployments: (value) => set({ deployments: value }),
+    setLoading: (value) => set({ loading: value }),
     addEnvVar: () => set((state) => ({ envVars: [...state.envVars, { key: '', value: '' }] })),
     updateEnvVar: (index, field, value) => set((state) => {
         const updated = [...state.envVars];
