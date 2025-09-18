@@ -7,13 +7,17 @@ import { SmallButton } from './SmallButton'
 import type { Deployment } from '@/lib/types'
 import { MotionDiv } from '@/lib/utils'
 import { useUploadStore } from '@/store/upload'
+import handleDeleteProject from '@/lib/helperFunctions/handleDeleteProject'
 
 interface Props {
   deployment: Deployment
   onDeploy: (id: string) => void
+  project_id: string
 }
 
-export function ProjectCard({ deployment, onDeploy }: Props) {
+export function ProjectCard({ project_id, deployment, onDeploy }: Props) {
+  console.log("hukgyfjtgcvhliuytfdrhf"+project_id);
+  
   const {
     loading
   } = useUploadStore();
@@ -126,7 +130,7 @@ export function ProjectCard({ deployment, onDeploy }: Props) {
                     <Settings className="w-2 h-2" />
                     Settings
                   </button>
-                  <button className="w-full text-left px-2 py-1.5 text-xs hover:bg-surface/80 flex items-center gap-1 text-red-400">
+                  <button className="w-full text-left px-2 py-1.5 text-xs hover:bg-surface/80 flex items-center gap-1 text-red-400" onClick={() => handleDeleteProject(project_id)}>
                     <Trash2 className="w-2 h-2" />
                     Delete
                   </button>

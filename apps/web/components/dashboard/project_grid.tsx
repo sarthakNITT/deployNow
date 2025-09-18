@@ -83,6 +83,7 @@ export default function ProjectGrid () {
                 key={deployment.id}
                 deployment={deployment}
                 onDeploy={handleDeploy}
+                project_id={deployment.id}
               />
             ))}
           </div>
